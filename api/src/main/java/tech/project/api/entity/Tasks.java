@@ -2,6 +2,8 @@ package tech.project.api.entity;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import org.jspecify.annotations.NonNull;
 
 @Entity
 @Table(name = "todo")
@@ -11,10 +13,19 @@ public class Tasks {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank
     private String nome;
+    @NotBlank
     private String descricao;
     private boolean realizado;
     private int prioridade;
+
+    public Tasks( String nome, String descricao, boolean realizado, int prioridade) {
+        this.nome = nome;
+        this.descricao = descricao;
+        this.realizado = realizado;
+        this.prioridade = prioridade;
+    }
 
     public Long getId() {
         return id;

@@ -1,7 +1,9 @@
 package tech.project.api.controller;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import tech.project.api.entity.Tasks;
 import tech.project.api.service.TasksService;
@@ -22,13 +24,13 @@ public class TaskController {
     }
 
     @PostMapping
-    public ResponseEntity<Tasks> create(@RequestBody Tasks task){
+    public ResponseEntity<Tasks> create(@Valid @RequestBody Tasks task){
         Tasks tasks = service.create(task);
         return ResponseEntity.ok().body(tasks);
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<Tasks> update(@RequestBody Long id, @PathVariable Tasks task){
+    public ResponseEntity<Tasks> update(@PathVariable Long id, @RequestBody Tasks task){
         Tasks tasks = service.update(id, task);
         return ResponseEntity.ok().body(tasks);
     }
